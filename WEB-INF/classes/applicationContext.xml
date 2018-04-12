@@ -127,6 +127,18 @@
 		<property name="linkManService" ref="linkmanService" ></property>
 	</bean>
 
+	<bean name="saleVisitDao" class="cn.itcast.dao.impl.SaleVisitDaoImpl" >
+		<!-- 注入sessionFactory -->
+		<property name="sessionFactory" ref="sessionFactory" ></property>
+	</bean>
+	<bean name="saleVisitService" class="cn.itcast.service.impl.SaleVisitServiceImpl" >
+		<property name="dao" ref="saleVisitDao" ></property>
+	</bean>
+	<bean name="SaleVisitAction" class="cn.itcast.web.action.SaleVisitAction" scope="prototype" >
+		<property name="saleVisitService" ref="saleVisitService" ></property>
+	</bean>
+
+
 
 
 

@@ -11,7 +11,20 @@
 
 	<package name="crm" namespace="/" extends="struts-default" >
 
-	
+	<interceptors>
+		<interceptor name="UserInteceptor" class="cn.itcast.web.action.UserInteceptor"></interceptor>
+		<interceptor-stack name="myStack">
+			<interceptor-ref name="UserInteceptor" >
+				<param name="excludeMethods">login,register</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</interceptor-stack>
+	</interceptors>
+
+	<default-interceptor-ref name="myStack"></default-interceptor-ref>
+		<global-results>
+			<result name="toLogin" type="redirect">/login.jsp</result>
+		</global-results>
 		<!-- 整合方案1:class属性上仍然配置action的完整类名
 				struts2仍然创建action,由spring负责组装Action中的依赖属性
 		 -->
@@ -22,6 +35,9 @@
 		  -->
 		<action name="UserAction_*" class="userAction" method="{1}" >
 			<result name="toHome" type="redirect" >/index.htm</result>
+			<result name="index" type="redirect" >/index.htm</result>
+			<result name="register"  >/register.jsp</result>
+
 			<result name="error" >/login.jsp</result>
 		</action>
 		<action name="CustomerAction_*" class="customerAction" method="{1}">
@@ -42,6 +58,16 @@
 				<param name="actionName">LinkManAction_list</param>
 			</result>
 			<result name="toedit" >/jsp/linkman/add.jsp</result>
+		</action>
+
+		<action name="SaleVisitAction_*" class="SaleVisitAction" method="{1}">
+			<result name="success" type="dispatcher">/jsp/salevisit/list.jsp</result>
+			<result name="toList" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">SaleVisitAction_list</param>
+			</result>
+			<result name="toedit" >/jsp/salevisit/add.jsp</result>
+
 		</action>
 	</package>
 </struts>

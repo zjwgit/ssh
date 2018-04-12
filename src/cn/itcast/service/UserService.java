@@ -7,4 +7,6 @@ public interface UserService {
 	User	getUserByCodePassword(User u);
 	//注册用户
 	void saveUser(User u);
+
+	User getUserByCode(String user_code);
 }

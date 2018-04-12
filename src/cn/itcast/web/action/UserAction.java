@@ -1,5 +1,6 @@
 package cn.itcast.web.action;
 
+import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -24,6 +25,18 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 			ActionContext.getContext().getSession().put("user", u);
 			//3 重定向到项目首页
 		return "toHome";
+	}
+	public String register() throws Exception {
+		//根据用户名获取用户，如果用户不为空，证明已经存在，注册失败，写错误信息，转到register.jsp
+		User exsitU = userService.getUserByCode(user.getUser_code());
+		String result="index";
+		if (exsitU!=null){
+			ActionContext.getContext().put("error","用户名已经存在");
+			return "register";
+
+		}
+		userService.saveUser(user);
+		return result;
 	}
 
 	@Override

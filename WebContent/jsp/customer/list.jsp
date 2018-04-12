@@ -30,6 +30,7 @@
 		document.getElementById("c_id").value=pid;
 		window.close();
     }
+
 </SCRIPT>
 
 <META content="MSHTML 6.00.2900.3492" name=GENERATOR>
@@ -128,7 +129,7 @@
 													<TD>
 													<s:property value="#cust.cust_mobile" />
 													</TD>
-													<s:if test="#parameters.select == null">
+													<s:if test="#parameters.select == true">
 													<TD>
 													<a href="${pageContext.request.contextPath }/CustomerAction_toedit?cust_id=<s:property value="#cust.cust_id" />">修改</a>
 													&nbsp;&nbsp;

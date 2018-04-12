@@ -36,6 +36,11 @@ public class UserServiceImpl implements UserService{
 		ud.save(u);
 	}
 
+	@Override
+	public User getUserByCode(String user_code) {
+		return ud.getByUserCode(user_code);
+	}
+
 	public void setUd(UserDao ud) {
 		this.ud = ud;
 	}
